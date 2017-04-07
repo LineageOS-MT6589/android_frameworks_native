@@ -3747,6 +3747,11 @@ status_t SurfaceFlinger::captureScreenImplLocked(
         bool useReadPixels)
 {
     ATRACE_CALL();
+    
+// Rotation artifact problems when useReadPixels is false
+#ifdef MTK_MT6589
+    useReadPixels = true;
+#endif
 
     // get screen geometry
     const uint32_t hw_w = hw->getWidth();
